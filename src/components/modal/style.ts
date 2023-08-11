@@ -24,7 +24,7 @@ export const ModalStyled = styled.div`
   z-index: 2;
 `;
 
-export const CloseButtonStyled = styled.button`
+export const CloseButtonStyled = styled.div`
   background: none;
   border: none;
   position: absolute;
@@ -34,5 +34,12 @@ export const CloseButtonStyled = styled.button`
   }
   &:hover {
     cursor: pointer;
+  }
+`;
+export const DataInput = styled.input`
+  background: ${(props)=>props.disabled? 'none' : 'none'};;
+  border: none;
+  :disabled{
+    color: red;
   }
 `;

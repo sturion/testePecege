@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import {
   QueryClient,
@@ -6,6 +7,8 @@ import {
 } from 'react-query'
 import Modal from './components/modal';
 import { PersonData } from './interfaces/personData.tsx';
+import { getUsers } from './services/api/endpoints/user.tsx';
+//import { apiInstance } from './services/api/axios.ts';
 
 
 const queryClient = new QueryClient()
@@ -24,10 +27,11 @@ function Home() {
   const { isLoading, data } = useQuery({
     queryKey: ['todos'],
     queryFn: () =>
-      fetch('https://jsonplaceholder.typicode.com/users').then(
-        (res) => res.json(),
+      getUsers().then(
+        (res) => console.log(res.json),
       ),
   })
+  getUsers();
 
   const onModalCloseRequest = (): void => {
     setIsModalOpen(false);
