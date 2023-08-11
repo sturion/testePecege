@@ -13,12 +13,12 @@ const queryClient = new QueryClient()
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Example />
+      <Home />
     </QueryClientProvider>
   )
 }
 
-function Example() {
+function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [allInfo, setAllInfo] = useState({});
   const { isLoading, data } = useQuery({
@@ -30,11 +30,9 @@ function Example() {
   })
 
   const onModalCloseRequest = (): void => {
-    // Optionally do stuff here before closing the modal
     setIsModalOpen(false);
   };
   const onModalOpenRequest = (modalData:PersonData): void => {
-    // Optionally do stuff here before closing the modal
     setAllInfo(modalData)
     setIsModalOpen(true);
   };

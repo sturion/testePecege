@@ -13,12 +13,10 @@ interface IModalProps {
 
 const Modal: React.FC<IModalProps> = ({ isOpen = false, onCloseRequest,data}) => {
   
-  // if isOpen is false, dont render anything
   if (!isOpen) {
     return null;
   }
 
-  // if isOpen is true, render the modal
   return (
     <CloseButtonStyled>
       <button type="button" onClick={onCloseRequest}>Close</button>
