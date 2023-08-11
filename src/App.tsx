@@ -27,11 +27,8 @@ function Home() {
   const { isLoading, data } = useQuery({
     queryKey: ['todos'],
     queryFn: () =>
-      getUsers().then(
-        (res) => console.log(res.json),
-      ),
+      getUsers(),
   })
-  getUsers();
 
   const onModalCloseRequest = (): void => {
     setIsModalOpen(false);
