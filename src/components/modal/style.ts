@@ -21,6 +21,10 @@ export const PageContainer = styled.div`
   display: flex;
 `;
 
+export const ModalButton = styled.button`
+  display: ${(props)=>props.disabled? 'none' : 'flex'};
+`;
+
 export const ModalStyled = styled.div`
   background: white;
   border: 1px solid #ccc;
@@ -35,10 +39,11 @@ export const ModalStyled = styled.div`
 
 export const CloseButtonStyled = styled.div`
   background: #2c2c2c;
+  min-width: 270px;
   filter: drop-shadow(5px 5px 2px #29298a);
   border-radius: 20px;
   width: 50vw;
-  height: 80vh;
+  height: fit-content;
   padding: 20px;
   position: sticky;
   display:flex;
@@ -49,20 +54,20 @@ export const CloseButtonStyled = styled.div`
 `;
 
 export const DataInput = styled.input`
-  background: ${(props)=>props.disabled? 'none' : 'blue'};
+  background: ${(props)=>props.disabled? 'none' : 'grey'};
   color: ${(props)=>props.disabled? 'white' : 'white'};
   height:20px;
   border: none;
-  margin-left: 10px;
-  width: calc(100% * (1/4) - 10px - 1px);
-  :disabled{
-    color: red;
-  }
+  border-radius: 20px;
+  margin: 5px;
+  max-width:300px;
+  width: 90%;
+  padding-left:5px;
 `;
 
 export const UserInfo = styled.div`
   border: 1px grey solid;
-  margin-top: 30px;
+  margin-top: 15px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -73,7 +78,7 @@ export const UserInfo = styled.div`
 
 export const CompanyInfo = styled.div`
    border: 1px grey solid;
-  margin-top: 30px;
+  margin-top: 15px;
   display: flex;
   border-radius: 5px;
   align-items: center;
@@ -83,19 +88,23 @@ export const CompanyInfo = styled.div`
   height: calc(100% * (1/3) - 10px - 1px);
 `;
 
-export const DataLabel = styled.label`
+export const DataLabel = styled.div`
   color:white;
+  width: 100px;
 `;
 
 export const DataContainer = styled.div`
   width:100%;
+  margin-left: 10px;
+  display:flex;
+  overflow:hidden;
 `;
 
 
 export const AddressInfo = styled.div`
   border: 1px grey solid;
   border-radius: 5px;
-  margin-top: 30px;
+  margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content:space-around;

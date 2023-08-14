@@ -4,11 +4,13 @@ import {
   QueryClient,
   QueryClientProvider,
   useQuery,
+  useMutation
 } from 'react-query'
-import { PageContainer,PersonContainer,Table } from './AppStyle.tsx';
+import { InformationCell, InformationsContainer, PageContainer,PersonContainer,Table } from './AppStyle.tsx';
 import Modal from './components/modal';
 import { PersonData } from './interfaces/personData.tsx';
-import { getUsers } from './services/api/endpoints/user.tsx';
+import { getUsers,createUser } from './services/api/endpoints/user.tsx';
+
 //import { apiInstance } from './services/api/axios.ts';
 
 
@@ -36,6 +38,15 @@ function Home() {
       getUsers(),
   })
 
+  const mutationCreate = useMutation((newTodo:PersonData) => {
+    return createUser(newTodo)
+  })
+
+  function create(data:PersonData){
+    mutationCreate.mutate(data)
+  }
+  
+
   const searchItems = (searchValue:string) => {
     setSearchInput(searchValue)
     if (searchInput !== '') {
@@ -57,6 +68,8 @@ function Home() {
     setIsModalOpen(true);
   };
 
+  const dataRender = searchInput.length > 1 ? filteredResults : data
+
   if (isLoading) return 'Loading...'
 
   return (
@@ -67,34 +80,18 @@ function Home() {
                 onChange={(e) => searchItems(e.target.value)}
             />
       </form>
+      <button onClick={() => onModalOpenRequest(data,false)}>Create</button>
       <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} data={allInfo} edit={edition}/>
-      {searchInput.length > 1 ? <div>{filteredResults.map((contato:PersonData) =>
-      <PersonContainer>
-      <div>{contato.name}</div>
-      <div>{contato.phone}</div>
-      <div>{contato.email}</div>
-      <button onClick={() => onModalOpenRequest(contato,false)}>
-        Open modal
-      </button>
-      <button onClick={() => onModalOpenRequest(contato,true)}>
-        Edit
-      </button>
-      <br />
-      </PersonContainer>
-      )}</div>: <Table> {data.map((contato:PersonData) =>
-      <PersonContainer>
-      <div>{contato.name}</div>
-      <div>{contato.phone}</div>
-      <div>{contato.email}</div>
-      <button onClick={() => onModalOpenRequest(contato,true)}>
-        Open modal
-      </button>
-      <button onClick={() => onModalOpenRequest(contato,false)}>
-        Edit
-      </button>
-      <br />
-      </PersonContainer>
-      )}</Table>}
+      <Table> 
+      {dataRender.map((contato:PersonData) =>
+      <InformationsContainer>
+      <InformationCell>{contato.name}</InformationCell>
+      <InformationCell>{contato.phone}</InformationCell>
+      <InformationCell>{contato.email}</InformationCell>
+      <InformationCell><button onClick={() => onModalOpenRequest(contato,true)}>Open</button></InformationCell>
+      <InformationCell><button onClick={() => onModalOpenRequest(contato,false)}>Edit</button></InformationCell>
+      </InformationsContainer>
+      )}</Table>
     </PageContainer>
   )
 }
