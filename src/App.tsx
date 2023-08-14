@@ -6,7 +6,7 @@ import {
   useQuery,
   useMutation
 } from 'react-query'
-import { InformationCell, InformationsContainer, PageContainer,PersonContainer,Table } from './AppStyle.tsx';
+import { ArrowIcon, ButtonCell, InformationCell, InformationsContainer, PageContainer,PersonContainer,Table } from './AppStyle.tsx';
 import Modal from './components/modal';
 import { PersonData } from './interfaces/personData.tsx';
 import { getUsers,createUser } from './services/api/endpoints/user.tsx';
@@ -88,10 +88,11 @@ function Home() {
       <InformationCell>{contato.name}</InformationCell>
       <InformationCell>{contato.phone}</InformationCell>
       <InformationCell>{contato.email}</InformationCell>
-      <InformationCell><button onClick={() => onModalOpenRequest(contato,true)}>Open</button></InformationCell>
-      <InformationCell><button onClick={() => onModalOpenRequest(contato,false)}>Edit</button></InformationCell>
+      <ButtonCell><button onClick={() => onModalOpenRequest(contato,true)}>Open</button></ButtonCell>
+      <ButtonCell><button onClick={() => onModalOpenRequest(contato,false)}></button></ButtonCell>
       </InformationsContainer>
       )}</Table>
+      <ArrowIcon></ArrowIcon>
     </PageContainer>
   )
 }

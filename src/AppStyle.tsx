@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import  BoxArrow  from "./assets/svg/boxArrow.svg";
 
 
 export const PageContainer = styled.div`
@@ -12,6 +13,11 @@ export const PageContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const ArrowIcon = styled(BoxArrow)` 
+  width: 24px; 
+  height: 24px;
+`
 
 export const PersonContainer = styled.div`
   background:#121212;
@@ -33,7 +39,11 @@ export const InformationsContainer = styled.tr`
 
 export const InformationCell = styled.td`
   display:flex;
+  width: 28%;
   min-width: 200px;
+`;
+export const ButtonCell = styled.td`
+  width: 8%;
 `;
 
 
@@ -41,8 +51,8 @@ export const InformationCell = styled.td`
 export const Table = styled.table`
   width: fit-content;
   min-width: 50vw;
-  border: 1px grey solid;
+  border: 1px #2c2c2c solid;
   tr:nth-child(even){
-    background: pink;
+    background: #2c2c2c;
   }
 `;
