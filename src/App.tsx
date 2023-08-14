@@ -4,11 +4,13 @@ import {
   QueryClient,
   QueryClientProvider,
   useQuery,
+  useMutation
 } from 'react-query'
-import { PageContainer } from './AppStyle.tsx';
+import { ArrowIcon, ButtonCell, InformationCell, InformationsContainer, PageContainer,PersonContainer,Table } from './AppStyle.tsx';
 import Modal from './components/modal';
 import { PersonData } from './interfaces/personData.tsx';
-import { getUsers } from './services/api/endpoints/user.tsx';
+import { getUsers,createUser } from './services/api/endpoints/user.tsx';
+
 //import { apiInstance } from './services/api/axios.ts';
 
 
@@ -28,12 +30,22 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [allInfo, setAllInfo] = useState({});
   const [searchInput, setSearchInput] = useState('');
+  const [edition,setEdition] = useState(false)
   const [filteredResults, setFilteredResults] = useState([]);
   const { isLoading, data } = useQuery({
     queryKey: ['todos'],
     queryFn: () =>
       getUsers(),
   })
+
+  const mutationCreate = useMutation((newTodo:PersonData) => {
+    return createUser(newTodo)
+  })
+
+  function create(data:PersonData){
+    mutationCreate.mutate(data)
+  }
+  
 
   const searchItems = (searchValue:string) => {
     setSearchInput(searchValue)
@@ -50,10 +62,13 @@ function Home() {
   const onModalCloseRequest = (): void => {
     setIsModalOpen(false);
   };
-  const onModalOpenRequest = (modalData:PersonData): void => {
-    setAllInfo(modalData)
+  const onModalOpenRequest = (modalData:PersonData,editProp:boolean): void => {
+    setAllInfo(modalData);
+    setEdition(editProp);
     setIsModalOpen(true);
   };
+
+  const dataRender = searchInput.length > 1 ? filteredResults : data
 
   if (isLoading) return 'Loading...'
 
@@ -65,28 +80,19 @@ function Home() {
                 onChange={(e) => searchItems(e.target.value)}
             />
       </form>
-      <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} data={allInfo}/>
-      {searchInput.length > 1 ? filteredResults.map((contato:PersonData) =>
-      <div>
-      <div>{contato.name}</div>
-      <div>{contato.phone}</div>
-      <div>{contato.email}</div>
-      <button onClick={() => onModalOpenRequest(contato)}>
-        Open modal
-      </button>
-      <br />
-      </div>
-      ):data.map((contato:PersonData) =>
-      <div>
-      <div>{contato.name}</div>
-      <div>{contato.phone}</div>
-      <div>{contato.email}</div>
-      <button onClick={() => onModalOpenRequest(contato)}>
-        Open modal
-      </button>
-      <br />
-      </div>
-      )}
+      <button onClick={() => onModalOpenRequest(data,false)}>Create</button>
+      <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} data={allInfo} edit={edition}/>
+      <Table> 
+      {dataRender.map((contato:PersonData) =>
+      <InformationsContainer>
+      <InformationCell>{contato.name}</InformationCell>
+      <InformationCell>{contato.phone}</InformationCell>
+      <InformationCell>{contato.email}</InformationCell>
+      <ButtonCell><button onClick={() => onModalOpenRequest(contato,true)}>Open</button></ButtonCell>
+      <ButtonCell><button onClick={() => onModalOpenRequest(contato,false)}></button></ButtonCell>
+      </InformationsContainer>
+      )}</Table>
+      <ArrowIcon></ArrowIcon>
     </PageContainer>
   )
 }
