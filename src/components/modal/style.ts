@@ -4,12 +4,18 @@ import styled from "styled-components";
 export const ModalBackgroundStyled = styled.div`
   background: #000;
   backdrop-filter: blur(2px);
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 1;
+`;
+
+export const PageContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
 `;
 
 export const ModalStyled = styled.div`
@@ -25,21 +31,30 @@ export const ModalStyled = styled.div`
 `;
 
 export const CloseButtonStyled = styled.div`
-  background: none;
+  background: red;
   border: none;
-  position: absolute;
+  position: sticky;
+  top: 5;
+  left: 6px;
   z-index: 1;
-  svg {
-    font-size: 1.5em;
-  }
-  &:hover {
-    cursor: pointer;
-  }
 `;
+
 export const DataInput = styled.input`
   background: ${(props)=>props.disabled? 'none' : 'none'};;
   border: none;
   :disabled{
     color: red;
   }
+`;
+
+export const UserInfo = styled.div`
+
+`;
+
+export const CompanyInfo = styled.div`
+  
+`;
+
+export const AddressInfo = styled.div`
+  
 `;
