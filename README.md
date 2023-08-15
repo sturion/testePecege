@@ -15,7 +15,7 @@ após a instalação, rode o comando:
 ```
 para iniciar o projeto e acesse-o no seu navegador utilizando a URL
 
-localhost:
+[localhost:](http://localhost:5173/)
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
