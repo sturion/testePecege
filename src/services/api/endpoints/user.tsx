@@ -7,14 +7,18 @@ export async function getUsers(){
 }
 
 export async function delUsers(id?:number){
-        await apiInstance.delete('/users/'+id)
-    
+    try{
+        const res = await apiInstance.delete('/users/'+id);
+        return res.status
+    }catch{
+        console.log("Erro ao deletar")
+    }
 }
 
 export async function createUser(data:PersonData) {
     try{
         const res = await apiInstance.post('/users',data)
-        return res;
+        return res.status;
     }
     catch{
         console.log("Erro na requisição")

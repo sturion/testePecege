@@ -10,7 +10,8 @@ import {
     DataLabel,
     DataContainer,
     ModalButton,
-    ModalActions
+    ModalActions,
+    ReactForm
 }from "./style.ts";
 import { useMutation } from "react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -92,7 +93,7 @@ const Modal: React.FC<IModalProps> = ({ isOpen = false, onCloseRequest, data, ed
     <ModalBackgroundStyled>
     <CloseButtonStyled>
       <CloseButton onClick={onCloseRequest}>X</CloseButton>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <ReactForm onSubmit={handleSubmit(onSubmit)}>
       {data.id ? <DataInput type="text" defaultValue={`#${data.id}`} disabled={true}></DataInput> : null}
         <UserInfo>
         <DataContainer><DataLabel>Nome:</DataLabel><DataInput {...register("name")} disabled={edit}></DataInput></DataContainer>
@@ -116,9 +117,9 @@ const Modal: React.FC<IModalProps> = ({ isOpen = false, onCloseRequest, data, ed
       </CompanyInfo>
       <ModalActions>
       <ModalButton disabled={edit} onClick={() => deleteUser(data.id)}>Delete</ModalButton>
-      <ModalButton disabled={edit} onClick={() => handleSubmit(onSubmit)}>{create ? "Criar usuário" : "Fazer Update"}</ModalButton>
+      <ModalButton disabled={edit} onClick={() => handleSubmit(onSubmit)}>{create ? "Criar" : "Update"}</ModalButton>
       </ModalActions>
-      </form>
+      </ReactForm>
     </CloseButtonStyled>
     </ModalBackgroundStyled>
 )};

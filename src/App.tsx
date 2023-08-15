@@ -5,11 +5,12 @@ import {
   QueryClientProvider,
   useQuery,
 } from 'react-query'
-import { ButtonCell, InformationCell, InformationsContainer, PageContainer,TableButton,Table, ToolsContainer,CreateButton,SearchInput } from './AppStyle.tsx';
+import { ButtonCell, InformationCell, InformationsContainer, PageContainer,TableButton,Table, ToolsContainer,CreateButton,SearchInput, OrderUsers,Card } from './AppStyle.tsx';
 import Modal from './components/modal';
 import { PersonData } from './interfaces/personData.tsx';
 import { getUsers } from './services/api/endpoints/user.tsx';
 import {Icon,EditIcon}  from "./assets/svg/boxArrow.tsx"
+import { Checkbox } from './components/checkbox';
 
 //import { apiInstance } from './services/api/axios.ts';
 
@@ -30,6 +31,7 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [allInfo, setAllInfo] = useState({});
   const [searchInput, setSearchInput] = useState('');
+  const [sort, setSort] = useState(false);
   const [edition,setEdition] = useState(true)
   const [creation,setCreation] = useState(false)
   const [filteredResults, setFilteredResults] = useState([]);
@@ -63,14 +65,16 @@ function Home() {
     setIsModalOpen(true);
   };
 
-  const dataRender = searchInput.length > 1 ? filteredResults : data
+  const dataHelp = data;
+  const rawData = sort ? data.sort((a:PersonData, b:PersonData) => (a.name > b.name) ? 1 : -1) : dataHelp;
+  const dataRender = searchInput.length > 1 ? filteredResults : rawData;
 
   if (isLoading) return 'Loading...'
 
   return (
     <PageContainer>
-      
       <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} data={allInfo} edit={edition} create={creation}/>
+      <Card>
       <Table> 
       {dataRender.map((contato:PersonData) =>
       <InformationsContainer>
@@ -78,17 +82,22 @@ function Home() {
       <InformationCell>{contato.phone}</InformationCell>
       <InformationCell>{contato.email}</InformationCell>
       <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,true,false)}><Icon/></TableButton></ButtonCell>
-      <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,false,false)}>
-        <EditIcon/>
-        </TableButton></ButtonCell>
+      <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,false,false)}><EditIcon/></TableButton></ButtonCell>
       </InformationsContainer>
       )}</Table>
+      </Card>
       <ToolsContainer>
       <SearchInput
                 placeholder='Insira o nome'
                 onChange={(e) => searchItems(e.target.value)}
             />
-      <CreateButton onClick={() => onModalOpenRequest(data,false,true)}>Criar usuário</CreateButton>
+      <CreateButton onClick={() => onModalOpenRequest(data,false,true)}>Adicionar</CreateButton>
+      <OrderUsers>
+      <Checkbox
+                onChange={() => setSort(!sort)}
+                checked={sort}
+              /><label>Ordenar Usuarios</label>
+            </OrderUsers>
       </ToolsContainer>
     </PageContainer>
   )
