@@ -12,7 +12,7 @@ export const ModalBackgroundStyled = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 8;
 `;
 
 export const PageContainer = styled.div`
@@ -23,6 +23,7 @@ export const PageContainer = styled.div`
 
 export const ModalButton = styled.button`
   display: ${(props)=>props.disabled? 'none' : 'flex'};
+  background: #61619f;
 `;
 
 export const ModalStyled = styled.div`
@@ -48,16 +49,16 @@ export const CloseButtonStyled = styled.div`
   position: sticky;
   display:flex;
   flex-direction: column;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: flex-end;
   z-index: 1;
 `;
 
 export const DataInput = styled.input`
-  background: ${(props)=>props.disabled? 'none' : 'grey'};
+  background: none;
   color: ${(props)=>props.disabled? 'white' : 'white'};
   height:20px;
-  border: none;
+  border: ${(props)=>props.disabled? 'none' : '1px solid grey'};
   border-radius: 20px;
   margin: 5px;
   max-width:300px;
@@ -112,8 +113,21 @@ export const AddressInfo = styled.div`
   height: calc(100% * (1/3) - 10px - 1px);
 `;
 
-export const CloseButton = styled.button`
-  width: 50px;
+export const CloseButton = styled.div`
+  width: 25px;
   align-self:right;
-  height: 50px;
+  height: 25px;
+  background: #ff6961;
+  border-radius:100%;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  color: #121212;
+`;
+
+export const ModalActions = styled.div`
+  display:flex;
+  width:25%;
+  justify-content: space-around;
+  align-self: right;
 `;

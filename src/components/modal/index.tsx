@@ -9,7 +9,8 @@ import {
     CloseButton,
     DataLabel,
     DataContainer,
-    ModalButton
+    ModalButton,
+    ModalActions
 }from "./style.ts";
 import { useMutation } from "react-query";
 import { delUsers,updateUser } from "../../services/api/endpoints/user.tsx";
@@ -50,7 +51,7 @@ const Modal: React.FC<IModalProps> = ({ isOpen = false, onCloseRequest, data, ed
   return (
     <ModalBackgroundStyled>
     <CloseButtonStyled>
-      <CloseButton type="button" onClick={onCloseRequest}>X</CloseButton>
+      <CloseButton onClick={onCloseRequest}>X</CloseButton>
       <form>
       {data.id ? <DataInput type="text" defaultValue={`#${data.id}`} disabled={true}></DataInput> : null}
         <UserInfo>
@@ -73,8 +74,10 @@ const Modal: React.FC<IModalProps> = ({ isOpen = false, onCloseRequest, data, ed
       <DataContainer><DataLabel>Slogan:</DataLabel><DataInput type="text" defaultValue={data.company?.catchPhrase} disabled={edit}></DataInput></DataContainer>
       <DataContainer><DataLabel>Ramo:</DataLabel><DataInput type="text" defaultValue={data.company?.bs} disabled={edit}></DataInput></DataContainer>
       </CompanyInfo>
-      <button onClick={() => deleteUser(data.id)}>Delete</button>
+      <ModalActions>
+      <ModalButton onClick={() => deleteUser(data.id)}>Delete</ModalButton>
       <ModalButton disabled={edit} onClick={() => update(data)}>Send Update</ModalButton>
+      </ModalActions>
       </form>
     </CloseButtonStyled>
     </ModalBackgroundStyled>

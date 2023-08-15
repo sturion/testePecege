@@ -6,10 +6,11 @@ import {
   useQuery,
   useMutation
 } from 'react-query'
-import { ArrowIcon, ButtonCell, InformationCell, InformationsContainer, PageContainer,PersonContainer,Table } from './AppStyle.tsx';
+import { ButtonCell, InformationCell, InformationsContainer, PageContainer,TableButton,Table, ToolsContainer,CreateButton,SearchInput } from './AppStyle.tsx';
 import Modal from './components/modal';
 import { PersonData } from './interfaces/personData.tsx';
 import { getUsers,createUser } from './services/api/endpoints/user.tsx';
+import {Icon,EditIcon}  from "./assets/svg/boxArrow.tsx"
 
 //import { apiInstance } from './services/api/axios.ts';
 
@@ -74,13 +75,6 @@ function Home() {
 
   return (
     <PageContainer>
-      <form>
-      <input
-                placeholder='Search...'
-                onChange={(e) => searchItems(e.target.value)}
-            />
-      </form>
-      <button onClick={() => onModalOpenRequest(data,false)}>Create</button>
       <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} data={allInfo} edit={edition}/>
       <Table> 
       {dataRender.map((contato:PersonData) =>
@@ -88,11 +82,19 @@ function Home() {
       <InformationCell>{contato.name}</InformationCell>
       <InformationCell>{contato.phone}</InformationCell>
       <InformationCell>{contato.email}</InformationCell>
-      <ButtonCell><button onClick={() => onModalOpenRequest(contato,true)}>Open</button></ButtonCell>
-      <ButtonCell><button onClick={() => onModalOpenRequest(contato,false)}></button></ButtonCell>
+      <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,true)}><Icon/></TableButton></ButtonCell>
+      <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,false)}>
+        <EditIcon/>
+        </TableButton></ButtonCell>
       </InformationsContainer>
       )}</Table>
-      <ArrowIcon></ArrowIcon>
+      <ToolsContainer>
+      <SearchInput
+                placeholder='Insira o nome'
+                onChange={(e) => searchItems(e.target.value)}
+            />
+      <CreateButton onClick={() => onModalOpenRequest(data,false)}>Create user</CreateButton>
+      </ToolsContainer>
     </PageContainer>
   )
 }
