@@ -4,12 +4,11 @@ import {
   QueryClient,
   QueryClientProvider,
   useQuery,
-  useMutation
 } from 'react-query'
 import { ButtonCell, InformationCell, InformationsContainer, PageContainer,TableButton,Table, ToolsContainer,CreateButton,SearchInput } from './AppStyle.tsx';
 import Modal from './components/modal';
 import { PersonData } from './interfaces/personData.tsx';
-import { getUsers,createUser } from './services/api/endpoints/user.tsx';
+import { getUsers } from './services/api/endpoints/user.tsx';
 import {Icon,EditIcon}  from "./assets/svg/boxArrow.tsx"
 
 //import { apiInstance } from './services/api/axios.ts';
@@ -31,22 +30,14 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [allInfo, setAllInfo] = useState({});
   const [searchInput, setSearchInput] = useState('');
-  const [edition,setEdition] = useState(false)
+  const [edition,setEdition] = useState(true)
+  const [creation,setCreation] = useState(false)
   const [filteredResults, setFilteredResults] = useState([]);
   const { isLoading, data } = useQuery({
     queryKey: ['todos'],
     queryFn: () =>
       getUsers(),
   })
-
-  const mutationCreate = useMutation((newTodo:PersonData) => {
-    return createUser(newTodo)
-  })
-
-  function create(data:PersonData){
-    mutationCreate.mutate(data)
-  }
-  
 
   const searchItems = (searchValue:string) => {
     setSearchInput(searchValue)
@@ -62,9 +53,12 @@ function Home() {
 }
   const onModalCloseRequest = (): void => {
     setIsModalOpen(false);
+    setEdition(false);
+    setCreation(false);
   };
-  const onModalOpenRequest = (modalData:PersonData,editProp:boolean): void => {
+  const onModalOpenRequest = (modalData:PersonData,editProp:boolean,createProp:boolean): void => {
     setAllInfo(modalData);
+    setCreation(createProp);
     setEdition(editProp);
     setIsModalOpen(true);
   };
@@ -75,15 +69,16 @@ function Home() {
 
   return (
     <PageContainer>
-      <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} data={allInfo} edit={edition}/>
+      
+      <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} data={allInfo} edit={edition} create={creation}/>
       <Table> 
       {dataRender.map((contato:PersonData) =>
       <InformationsContainer>
       <InformationCell>{contato.name}</InformationCell>
       <InformationCell>{contato.phone}</InformationCell>
       <InformationCell>{contato.email}</InformationCell>
-      <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,true)}><Icon/></TableButton></ButtonCell>
-      <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,false)}>
+      <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,true,false)}><Icon/></TableButton></ButtonCell>
+      <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,false,false)}>
         <EditIcon/>
         </TableButton></ButtonCell>
       </InformationsContainer>
@@ -93,7 +88,7 @@ function Home() {
                 placeholder='Insira o nome'
                 onChange={(e) => searchItems(e.target.value)}
             />
-      <CreateButton onClick={() => onModalOpenRequest(data,false)}>Create user</CreateButton>
+      <CreateButton onClick={() => onModalOpenRequest(data,false,true)}>Criar usuário</CreateButton>
       </ToolsContainer>
     </PageContainer>
   )

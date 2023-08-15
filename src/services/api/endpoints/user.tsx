@@ -12,17 +12,21 @@ export async function delUsers(id?:number){
 }
 
 export async function createUser(data:PersonData) {
-    console.log(data)
-    const res = await apiInstance.post('/users',data)
-    console.log(res)
+    try{
+        const res = await apiInstance.post('/users',data)
+        return res;
+    }
+    catch{
+        console.log("Erro na requisição")
+
+    }
 }
 
 export async function updateUser(data:PersonData) {
     try{
-    await apiInstance.post('/users/' + data.id,data)
-    return 200;
+    const res = await apiInstance.put(`/users/${data.id}`,data);
+    return res.status;
 }catch{
     console.log("Erro na requisição")
-    return 400
 }
 }

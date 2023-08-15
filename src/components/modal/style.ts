@@ -118,6 +118,7 @@ export const CloseButton = styled.div`
   align-self:right;
   height: 25px;
   background: #ff6961;
+  cursor: pointer;
   border-radius:100%;
   display:flex;
   align-items:center;

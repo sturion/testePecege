@@ -71,6 +71,7 @@ export const ToolsContainer = styled.div`
 export const SearchInput = styled.input`
   border: 1px solid #61619f;
   background: none;
+  color: white;
   height:40px;
   border-radius: 10px;
 `;
