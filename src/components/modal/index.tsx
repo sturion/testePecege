@@ -12,7 +12,7 @@ import {
     ModalButton,
     ModalActions,
     ReactForm
-}from "./style.ts";
+}from "./style.tsx";
 import { useMutation } from "react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { delUsers,updateUser,createUser } from "../../services/api/endpoints/user.tsx";
