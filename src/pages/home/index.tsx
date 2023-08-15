@@ -8,12 +8,7 @@ import { PersonData } from '../../interfaces/personData.tsx';
 import { getUsers } from '../../services/api/endpoints/user.tsx';
 import {Icon,EditIcon}  from "../../assets/svg/boxArrow.tsx"
 import { Checkbox } from '../../components/checkbox';
-
-
-
-
-
-
+import LoadingSpinner from '../../components/loading';
 const Home: React.FC = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,7 +53,7 @@ const Home: React.FC = () => {
     const rawData = sort ? data.sort((a:PersonData, b:PersonData) => (a.name > b.name) ? 1 : -1) : dataHelp;
     const dataRender = searchInput.length > 1 ? filteredResults : rawData;
   
-    if (isLoading) return(<div>'Loading...'</div>) 
+    if (isLoading) return(<LoadingSpinner />) 
   
     return (
         
