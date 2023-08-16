@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import {
     CloseButtonStyled,
     DataInput,
@@ -12,7 +12,7 @@ import {
     ModalButton,
     ModalActions,
     ReactForm
-}from "./style.tsx";
+}from "./style.jsx";
 import { useMutation } from "react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { delUsers,updateUser,createUser } from "../../services/api/endpoints/user.tsx";
@@ -83,11 +83,10 @@ const Modal: React.FC<IModalProps> = ({ isOpen = false, onCloseRequest, data, ed
   function deleteUser(id?:number){
     mutationDelete.mutate(id)
   }
-  
+
   if (!isOpen) {
     return null;
   }
-
 
   return (
     <ModalBackgroundStyled>

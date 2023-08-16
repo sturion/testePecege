@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   useQuery,
 } from 'react-query'
-import { ButtonCell, InformationCell, InformationsContainer, PageContainer,TableButton,Table, ToolsContainer,CreateButton,SearchInput, OrderUsers,Card } from './style.tsx';
+import { ButtonCell, InformationCell, InformationsContainer, PageContainer,TableButton,Table, ToolsContainer,CreateButton,SearchInput, OrderUsers,Card, CardContainer, CardInfoCont, CardInformation, EditDiv } from './style.tsx';
 import Modal from '../../components/modal';
 import { PersonData } from '../../interfaces/personData.tsx';
 import { getUsers } from '../../services/api/endpoints/user.tsx';
@@ -18,6 +18,7 @@ const Home: React.FC = () => {
     const [edition,setEdition] = useState(true)
     const [creation,setCreation] = useState(false)
     const [filteredResults, setFilteredResults] = useState([]);
+    const isMobile = () => window.innerWidth <= 768;
     
     const { isLoading, data } = useQuery({
       queryKey: ['todos'],
@@ -59,8 +60,18 @@ const Home: React.FC = () => {
         
       <PageContainer>
         <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} data={allInfo} edit={edition} create={creation}/>
-        <Card>
-        <Table> 
+        {isMobile() ? 
+        <CardContainer>
+          {dataRender.map((contato:PersonData)=>
+          <Card>
+            <CardInfoCont onClick={() => onModalOpenRequest(contato,true,false)}>
+          <CardInformation>{contato.name}</CardInformation>
+          <CardInformation>{contato.phone}</CardInformation>
+          <CardInformation>{contato.email}</CardInformation>
+          </CardInfoCont>
+          <EditDiv onClick={() => onModalOpenRequest(contato,false,false)}><EditIcon/></EditDiv>
+          </Card>)}
+        </CardContainer> : <Table> 
         {dataRender.map((contato:PersonData) =>
         <InformationsContainer>
         <InformationCell>{contato.name}</InformationCell>
@@ -69,8 +80,8 @@ const Home: React.FC = () => {
         <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,true,false)}><Icon/></TableButton></ButtonCell>
         <ButtonCell><TableButton onClick={() => onModalOpenRequest(contato,false,false)}><EditIcon/></TableButton></ButtonCell>
         </InformationsContainer>
-        )}</Table>
-        </Card>
+        )}</Table>}
+        
         <ToolsContainer>
         <SearchInput
                   placeholder='Insira o nome'
