@@ -1,5 +1,10 @@
 import React from "react";
-import { CheckboxContainer,Icon,HiddenCheckbox,StyledCheckbox } from "./style";
+import {
+  CheckboxContainer,
+  Icon,
+  HiddenCheckbox,
+  StyledCheckbox,
+} from "./style";
 
 interface IProps {
   className?: string;
