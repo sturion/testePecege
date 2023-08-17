@@ -42,7 +42,6 @@ export const Snackbar: React.FC<ISnackbarProps> = ({ info }) => {
       message = "Ocorreu um erro";
       break;
   }
-  console.log(info);
   return (
     <SnackbarContainer>
       <SnackbarDiv status={status}>{message}</SnackbarDiv>

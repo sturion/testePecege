@@ -62,11 +62,9 @@ const Home: React.FC = () => {
   };
 
   const showSnackbar = (info: string): void => {
-    console.log(info);
     setSnackbarInformation(info);
     setSnackbarState(true);
     setTimeout(setSnackbarState, 5000);
-    console.log(snackbarState);
   };
 
   const onModalOpenRequest = (
