@@ -1,16 +1,21 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
+const fadeIn = keyframes`
+  0% { opacity: 0};
+  100% {opacity: 1}
+`;
 
 export const ModalBackgroundStyled = styled.div`
   background: #00000011;
   backdrop-filter: blur(2px);
-  width:100vw;
-  height:100vh;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 8;
+  animation: ${fadeIn} 0.4s linear;
 `;
 
 export const PageContainer = styled.div`
@@ -20,9 +25,9 @@ export const PageContainer = styled.div`
 `;
 
 export const ModalButton = styled.button`
-  display: ${(props)=>props.disabled? 'none' : 'flex'};
+  display: ${(props) => (props.disabled ? "none" : "flex")};
   height: 40px;
-  color:white;
+  color: white;
   margin: 5px;
   background: #61619f;
 `;
@@ -45,105 +50,104 @@ export const CloseButtonStyled = styled.div`
   filter: drop-shadow(8px 8px 2px #61619f);
   border-radius: 20px;
   width: 50vw;
-  height: 70vh;
+  height: 80vh;
   padding: 30px 20px;
   position: sticky;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow:auto;
+  overflow: auto;
   align-items: flex-end;
   z-index: 1;
 `;
 
 export const DataInput = styled.input`
   background: none;
-  color: ${(props)=>props.disabled? 'white' : 'white'};
-  height:20px;
-  border: ${(props)=>props.disabled? 'none' : '1px solid grey'};
+  color: ${(props) => (props.disabled ? "white" : "white")};
+  height: 20px;
+  border: ${(props) => (props.disabled ? "none" : "1px solid grey")};
   border-radius: 20px;
   margin: 5px;
-  max-width:300px;
+  max-width: 300px;
   width: 90%;
-  padding-left:5px;
+  padding-left: 5px;
   align-self: flex-start;
 `;
 
 export const UserInfo = styled.div`
   border: 1px grey solid;
   margin-top: 15px;
-  width:100%;
+  width: 100%;
   display: flex;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:space-around;
+  justify-content: space-around;
   flex-wrap: wrap;
-  height: 40%;
+  height: 30%;
 `;
 
 export const CompanyInfo = styled.div`
-   border: 1px grey solid;
+  border: 1px grey solid;
   margin-top: 15px;
   display: flex;
-  width:100%;
+  width: 100%;
   border-radius: 5px;
   align-items: center;
   margin-bottom: 40px;
-  justify-content:space-around;
+  justify-content: space-around;
   flex-wrap: wrap;
   height: 30%;
 `;
 
 export const DataLabel = styled.div`
-  color:white;
+  color: white;
   width: 100px;
 `;
 
 export const DataContainer = styled.div`
-  width:40%;
-  display:flex;
-  flex-direction:column;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
 `;
-
 
 export const AddressInfo = styled.div`
   border: 1px grey solid;
   border-radius: 5px;
   margin-top: 15px;
-  width:100%;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content:space-around;
+  justify-content: space-around;
   flex-wrap: wrap;
   height: 50%;
 `;
 
 export const CloseButton = styled.div`
   width: 25px;
-  align-self:right;
+  align-self: right;
   height: 25px;
   margin-top: 10px;
   background: #ff6961;
   cursor: pointer;
-  border-radius:100%;
-  display:flex;
-  align-items:center;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
   justify-content: center;
   color: #121212;
 `;
 
 export const ModalActions = styled.div`
-  display:flex;
-  width:25%;
+  display: flex;
+  width: 25%;
   justify-content: space-around;
   padding-bottom: 30px;
 `;
 
 export const ReactForm = styled.form`
- height:100%;
- display:flex;
- flex-direction: column;
- align-items: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
