@@ -15,4 +15,4 @@ após a instalação, rode o comando:
 ```
 para iniciar o projeto e acesse-o no seu navegador utilizando a URL
 
-localhost:
+[http://localhost:5173/](http://localhost:5173/)
