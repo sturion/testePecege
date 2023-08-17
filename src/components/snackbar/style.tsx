@@ -1,4 +1,12 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+  0% { opacity: 0};
+  25% { opacity: 1};
+  50% {opacity: 1};
+  100% {opacity: 0};
+`;
+
 
 interface Props {
   status: string;
@@ -33,4 +41,5 @@ export const SnackbarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: ${fadeIn} 5s alternate;
 `;
