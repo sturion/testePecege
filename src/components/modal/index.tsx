@@ -14,7 +14,7 @@ import {
   ReactForm,
 } from "../modal/style.tsx";
 import { useMutation } from "react-query";
-import { useForm, SubmitHandler,FieldErrors } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   delUsers,
   updateUser,
@@ -43,12 +43,10 @@ const Modal: React.FC<IModalProps> = ({
 }) => {
   const { register, handleSubmit, reset, setValue} = useForm<PersonData>();
   const onSubmit: SubmitHandler<PersonData> = (data) => {
-    console.log("entrou");
     create ? createForm(data) : update(data);
   };
 
-  const onError = (errors:FieldErrors) => {
-    console.log(errors)
+  const onError = () => {
     snackbarBool("formError");
   }
 
@@ -90,7 +88,6 @@ const Modal: React.FC<IModalProps> = ({
   });
 
   function update(data: PersonData) {
-    console.log("entrou");
     mutationUpdate.mutate(data);
     mutationUpdate.isSuccess ? snackbarBool("updateSuccess") : null;
     mutationUpdate.isError ? snackbarBool("updateError") : null;
