@@ -50,7 +50,7 @@ export const CloseButtonStyled = styled.div`
   filter: drop-shadow(8px 8px 2px #61619f);
   border-radius: 20px;
   width: 50vw;
-  height: 70vh;
+  height: 80vh;
   padding: 30px 20px;
   position: sticky;
   display: flex;
@@ -85,7 +85,7 @@ export const UserInfo = styled.div`
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  height: 40%;
+  height: 30%;
 `;
 
 export const CompanyInfo = styled.div`
